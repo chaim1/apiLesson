@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src='../../node_modules\jquery\dist\jquery.js'></script>
+    <title>Document</title>
+</head>
+<body>
+<select id="city">
+</select>
+<button id="showWeather">show weather</button>
+<div id="weather"></div>
+
+    <script>
+var cityArray = ["Afula","Akko","Arad","Ashdod","Ashqelon","Bat+Yam","Beersheba","Bet+Shean","Bet+Shearim","Bnei+Brak","Caesarea","Dimona","Dor","Elat","En+Gedi","Givatayim","H̱adera","Haifa","Herzliyya","Hholon","Jerusalem","Karmiel","Kefar+Sava","Lod","Meron","Nahariyya","Nazareth","Netanya","Petah+Tiqwa","Qiryat+Shemona","Ramat+Gan","Ramla","Reẖovot","Rishon+Leziyyon","Sedom","Tel+Aviv","Tiberias","zefat"];
+for(i=0;i<cityArray.length;i++){
+    var city =cityArray[i]; 
+    document.getElementById('city').innerHTML+="<option value="+city+">"+city+"</option>";
+}
+        $( "#showWeather" ).click(function() {
+            var city = $('#city').find(":selected").text();
+            $.ajax({
+            url: "http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=302a183258908e922f9b84eb83961126",
+            method: 'GET'
+            }).done(function (d) {
+                if (typeof d === 'string')
+                    d = JSON.parse(d);
+                    $( "#weather" ).html( JSON.stringify(d) );            
+                    });
+        });
+        
+    </script>
+</body>
+</html>
