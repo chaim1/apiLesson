@@ -19,13 +19,14 @@
 
 
 
-
+var city = 'new+york';
 
 $.ajax({
     url: "api.php",
+    data: 'value='+city,
     method: 'GET'
 }).done(function (d) {
     // if (typeof d === 'string')
-        d = JSON.parse(d);
+        // d = JSON.parse(d);
     console.log(d);
 });
